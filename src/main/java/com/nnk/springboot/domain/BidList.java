@@ -2,7 +2,7 @@ package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.security.Timestamp;
 
 @Entity
 public class BidList {
@@ -21,16 +21,16 @@ public class BidList {
     private double bid;
     private double ask;
     private String benchmark;
-    private LocalDateTime bidListDate;
+    private Timestamp bidListDate;
     private String commentary;
     private String security;
     private String status;
     private String trader;
     private String book;
     private String creationName;
-    private LocalDateTime creationDate;
+    private Timestamp creationDate;
     private String revisionName;
-    private LocalDateTime revisionDate;
+    private Timestamp revisionDate;
     private String dealName;
     private String dealType;
     private String sourceListId;

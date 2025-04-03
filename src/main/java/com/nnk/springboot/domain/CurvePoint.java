@@ -1,9 +1,12 @@
 package com.nnk.springboot.domain;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-import java.time.LocalDateTime;
+import java.security.Timestamp;
 
 @Entity
 public class CurvePoint {
@@ -12,10 +15,10 @@ public class CurvePoint {
     private int id;
 
     private int curveId;
-    private LocalDateTime asOfDate;
+    private Timestamp asOfDate;
     private double term;
     private double value;
-    private LocalDateTime creationDate;
+    private Timestamp creationDate;
 
 
 }

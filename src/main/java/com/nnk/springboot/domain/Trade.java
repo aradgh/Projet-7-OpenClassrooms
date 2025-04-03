@@ -2,7 +2,7 @@ package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.security.Timestamp;
 
 @Entity
 public class Trade {
@@ -20,16 +20,16 @@ public class Trade {
     private double sellQuantity;
     private double buyPrice;
     private double sellPrice;
-    private LocalDateTime tradeDate;
+    private Timestamp tradeDate;
     private String security;
     private String status;
     private String trader;
     private String benchmark;
     private String book;
     private String creationName;
-    private LocalDateTime creationDate;
+    private Timestamp creationDate;
     private String revisionName;
-    private LocalDateTime revisionDate;
+    private Timestamp revisionDate;
     private String dealName;
     private String dealType;
     private String sourceListId;
