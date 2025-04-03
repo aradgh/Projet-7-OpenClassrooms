@@ -1,11 +1,22 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.security.Timestamp;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class BidList {
+    public BidList(String accountTest, String typeTest, double v) {
+        this.account = accountTest;
+        this.type = typeTest;
+        this.bidQuantity = v;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int bidListId;
@@ -35,4 +46,5 @@ public class BidList {
     private String dealType;
     private String sourceListId;
     private String side;
+
 }
