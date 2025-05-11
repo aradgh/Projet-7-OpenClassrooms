@@ -1,9 +1,7 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.security.Timestamp;
 
@@ -11,6 +9,9 @@ import java.security.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 public class BidList {
     public BidList(String accountTest, String typeTest, double v) {
         this.account = accountTest;
@@ -27,6 +28,7 @@ public class BidList {
     @Column(nullable = false)
     private String type;
 
+//    TODO: Ajouter des annotations pour valider les champs correspondants
     private double bidQuantity;
     private double askQuantity;
     private double bid;
