@@ -24,13 +24,14 @@ public class TradeController {
         return "trade/list";
     }
 
+// Pourquoi y a-t-il un addUser et pas un add trade ?
     @GetMapping("/trade/add")
     public String addUser(Trade trade) {
         return "trade/add";
     }
 
     @PostMapping("/trade/validate")
-    public String validate(@Valid Trade trade, BindingResult result, Model model) {
+    public String validate(@Valid Trade trade, BindingResult result) {
         if (!result.hasErrors()) {
             tradeService.save(trade);
             return "redirect:/trade/list";

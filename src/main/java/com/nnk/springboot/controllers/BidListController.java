@@ -29,6 +29,7 @@ public class BidListController {
 
     @RequestMapping("/add")
     public String showAddBidForm(@ModelAttribute BidList bidList) {
+        System.out.println("showAddBidForm : " + bidList);
         return "bidList/add";
     }
 
