@@ -5,31 +5,50 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 public class CurvePoint {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
-    private int curveId;
-    private Timestamp asOfDate;
-    private double term;
-    private double value;
-    private Timestamp creationDate;
-
-
     public CurvePoint(int i, double v, double v1) {
         this.curveId = i;
         this.term = v;
         this.value = v1;
     }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+/*  Ici on remplace le type primitif integer par l'objet wrapper Integer
+ *   afin de pouvoir utiliser l'annotation de validation @NotNull. Cela
+ *   permet à Spring de gérer correctement l'absence de valeur (nullabilité + validation) */
+    @NotNull(message = "Le champ 'curveId' est requis")
+    private Integer curveId;
+
+    @NotNull(message = "Le champ 'term' est requis")
+    @Digits(integer = 5, fraction = 2,
+        message = "Le champ 'term' doit être un nombre avec au maximum 5 chiffres avant la virgule et 2 après")
+    private Double term;
+
+    @NotNull(message = "Le champ 'value' est requis")
+    @Digits(integer = 5, fraction = 2,
+        message = "Le champ 'value' doit être un nombre avec au maximum 5 chiffres avant la virgule et 2 après")
+    private Double value;
+
+
+    /*    Les champs suivants n'ont pas d'annotations de validation
+    car ils ne sont utilisés nulle part dans le projet */
+    private Timestamp asOfDate;
+    private Timestamp creationDate;
+
+
 }

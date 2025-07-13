@@ -1,6 +1,9 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,13 +24,22 @@ public class Trade {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int tradeId;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Le champ 'account' ne doit pas être vide.")
     private String account;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Le champ 'type' ne doit pas être vide.")
     private String type;
 
-    private double buyQuantity;
+/*  Ici on remplace le type primitif double par l'objet wrapper Double
+ *   afin de pouvoir utiliser l'annotation de validation @NotNull. Cela
+ *   permet à Spring de gérer correctement l'absence de valeur (nullabilité + validation) */
+    @NotNull
+    @Digits(integer = 5, fraction = 2,
+    message = "Le champ 'buyQuantity' doit être un nombre avec au maximum 5 chiffres avant la virgule et 2 après")
+    private Double buyQuantity;
+
+/*    Les champs suivants n'ont pas d'annotations de validation
+    car ils ne sont utilisés nulle part dans le projet */
     private double sellQuantity;
     private double buyPrice;
     private double sellPrice;

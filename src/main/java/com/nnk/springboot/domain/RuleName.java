@@ -1,6 +1,7 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,11 +23,22 @@ public class RuleName {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotBlank(message = "Le champ 'name' est requis")
     private String name;
+
+    @NotBlank(message = "Le champ 'description' est requis")
     private String description;
+
+    @NotBlank(message = "Le champ 'json' est requis")
     private String json;
+
+    @NotBlank(message = "Le champ 'template' est requis")
     private String template;
+
+    @NotBlank(message = "Le champ 'sqlStr' est requis")
     private String sqlStr;
+
+    @NotBlank(message = "Le champ 'sqlPart' est requis")
     private String sqlPart;
 
 }
