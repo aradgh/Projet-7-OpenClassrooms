@@ -2,12 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title> Spring Boot </title>
-    <link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
-<body>
+<body class="m-3">
 <h3> HOME PAGE </h3>
+<p class="text-success" th:if="${param.logout}">You've been successfully disconnected</p>
 <p>
-    <a href="/bidList/add">Bid Add</a> or create one <a href="/user/list">User management</a>
+    <a href="/app/login">Login</a> or create one <a href="/user/list">User management</a>
 </p>
 </body>
 </html>
