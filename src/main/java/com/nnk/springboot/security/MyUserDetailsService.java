@@ -14,7 +14,7 @@ import java.util.List;
 public class MyUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
-    private MyUserDetailsService(UserRepository userRepository) {
+    public MyUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
