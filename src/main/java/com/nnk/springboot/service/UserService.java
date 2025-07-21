@@ -24,6 +24,10 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id: " + id));
     }
 
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new NullPointerException("User " + username + " not found"));
+    }
+
     public User save(User user) {
         return userRepository.save(user);
     }
@@ -32,4 +36,5 @@ public class UserService {
         User user = findById(id);
         userRepository.delete(user);
     }
+
 }
