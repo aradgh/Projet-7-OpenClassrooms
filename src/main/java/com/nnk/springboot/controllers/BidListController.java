@@ -1,8 +1,12 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.repositories.UserRepository;
+import com.nnk.springboot.security.MyUserDetailsService;
 import com.nnk.springboot.service.BidListService;
 import jakarta.validation.Valid;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,8 +32,8 @@ public class BidListController {
     }
 
     @RequestMapping("/add")
-    public String showAddBidForm(@ModelAttribute BidList bidList) {
-        System.out.println("showAddBidForm : " + bidList);
+    public String showAddBidForm(Model model, BidList bidList) {
+        model.addAttribute("bidList", bidList);
         return "bidList/add";
     }
 

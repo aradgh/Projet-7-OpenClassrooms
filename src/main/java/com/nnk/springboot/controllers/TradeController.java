@@ -3,11 +3,13 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.service.TradeService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class TradeController {
@@ -24,9 +26,9 @@ public class TradeController {
         return "trade/list";
     }
 
-// Pourquoi y a-t-il un addUser et pas un add trade ?
     @GetMapping("/trade/add")
-    public String addUser(Trade trade) {
+    public String addUser(Model model, Trade trade) {
+        model.addAttribute("trade", trade);
         return "trade/add";
     }
 
