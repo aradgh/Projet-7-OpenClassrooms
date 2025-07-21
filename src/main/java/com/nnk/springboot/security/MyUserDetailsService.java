@@ -18,6 +18,15 @@ public class MyUserDetailsService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Charge un utilisateur par son nom d'utilisateur.
+     * Utilisé par Spring Security lors du processus d'authentification.
+     *
+     * @param username le nom d'utilisateur de l'utilisateur à rechercher
+     * @return un objet {@link UserDetails} contenant les informations de sécurité de l'utilisateur
+     * @throws UsernameNotFoundException si aucun utilisateur correspondant n'est trouvé
+     */
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)

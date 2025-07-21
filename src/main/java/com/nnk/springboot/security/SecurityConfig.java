@@ -12,6 +12,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    /**
+     * Configure la chaîne de filtres de sécurité HTTP pour les requêtes Web.
+     *
+     * Définit les règles d'autorisation, de connexion, de déconnexion, et de gestion de session.
+     *
+     * @param http l'objet {@link HttpSecurity} utilisé pour configurer la sécurité
+     * @return la chaîne de filtres {@link SecurityFilterChain} configurée
+     * @throws Exception en cas d'erreur de configuration
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -36,6 +45,14 @@ public class SecurityConfig {
             );
         return http.build();
     }
+
+    /**
+     * Fournit le bean {@link PasswordEncoder} pour encoder les mots de passe utilisateurs.
+     *
+     * Utilise ici l'algorithme BCrypt.
+     *
+     * @return le bean {@link PasswordEncoder}
+     */
 
     @Bean
     public PasswordEncoder passwordEncoder() {
