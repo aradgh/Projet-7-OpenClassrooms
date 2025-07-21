@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
@@ -19,13 +20,13 @@ import java.sql.Timestamp;
 @Builder
 @Data
 public class BidList {
-    public BidList(String accountTest, String typeTest, double v) {
-        this.account = accountTest;
-        this.type = typeTest;
-        this.bidQuantity = v;
+    public BidList(String account, String type, BigDecimal bidQuantity) {
+        this.account = account;
+        this.type = type;
+        this.bidQuantity = bidQuantity;
     }
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int bidListId;
 
     @NotBlank(message = "Le champ 'account' ne doit pas être vide")
@@ -40,7 +41,7 @@ public class BidList {
     @NotNull(message = "Le champ 'bidQuantity' est requis")
     @Digits(integer = 5, fraction = 2,
         message = "Le champ 'bidQuantity' doit être un nombre avec au maximum 5 chiffres avant la virgule et 2 après")
-    private Double bidQuantity;
+    private BigDecimal bidQuantity;
 
 /*    Les champs suivants n'ont pas d'annotations de validation
     car ils ne sont utilisés nulle part dans le projet */

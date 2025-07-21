@@ -12,7 +12,7 @@ import lombok.Setter;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     @NotBlank(message = "Username is mandatory")
@@ -25,7 +25,7 @@ public class User {
     )
     private String password;
 
-    @NotBlank(message = "FullName is mandatory")
+    @NotBlank(message = "Full Name is mandatory")
     private String fullname;
 
     @NotBlank(message = "Role is mandatory")

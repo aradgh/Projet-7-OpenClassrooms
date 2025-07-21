@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
@@ -18,14 +19,14 @@ import java.sql.Timestamp;
 @Setter
 @NoArgsConstructor
 public class CurvePoint {
-    public CurvePoint(int i, double v, double v1) {
-        this.curveId = i;
-        this.term = v;
-        this.value = v1;
+    public CurvePoint(int curveId, BigDecimal term, BigDecimal value) {
+        this.curveId = curveId;
+        this.term = term;
+        this.value = value;
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
 /*  Ici on remplace le type primitif integer par l'objet wrapper Integer
@@ -37,12 +38,12 @@ public class CurvePoint {
     @NotNull(message = "Le champ 'term' est requis")
     @Digits(integer = 5, fraction = 2,
         message = "Le champ 'term' doit être un nombre avec au maximum 5 chiffres avant la virgule et 2 après")
-    private Double term;
+    private BigDecimal term;
 
     @NotNull(message = "Le champ 'value' est requis")
     @Digits(integer = 5, fraction = 2,
         message = "Le champ 'value' doit être un nombre avec au maximum 5 chiffres avant la virgule et 2 après")
-    private Double value;
+    private BigDecimal value;
 
 
     /*    Les champs suivants n'ont pas d'annotations de validation

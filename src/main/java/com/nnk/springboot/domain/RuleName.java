@@ -20,7 +20,7 @@ public class RuleName {
         this.sqlPart = sqlPart;
     }
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotBlank(message = "Le champ 'name' est requis")

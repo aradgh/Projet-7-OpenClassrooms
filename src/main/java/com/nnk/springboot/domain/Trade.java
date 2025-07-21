@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.security.Timestamp;
 
 @Entity
@@ -21,7 +22,7 @@ public class Trade {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int tradeId;
 
     @NotBlank(message = "Le champ 'account' ne doit pas être vide.")
@@ -36,7 +37,7 @@ public class Trade {
     @NotNull
     @Digits(integer = 5, fraction = 2,
     message = "Le champ 'buyQuantity' doit être un nombre avec au maximum 5 chiffres avant la virgule et 2 après")
-    private Double buyQuantity;
+    private BigDecimal buyQuantity;
 
 /*    Les champs suivants n'ont pas d'annotations de validation
     car ils ne sont utilisés nulle part dans le projet */

@@ -24,7 +24,7 @@ public class Rating {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotBlank(message = "La notation Moody's ne doit pas être vide")
