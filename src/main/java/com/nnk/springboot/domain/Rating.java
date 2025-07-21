@@ -1,9 +1,6 @@
 package com.nnk.springboot.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -31,6 +28,7 @@ public class Rating {
     private String moodysRating;
 
     @NotBlank(message = "La notation S&P ne doit pas être vide")
+    @Column(name="sand_p_rating")
     private String sandPRating;
 
     @NotBlank(message = "La notation Fitch ne doit pas être vide")
