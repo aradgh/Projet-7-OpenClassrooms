@@ -34,12 +34,7 @@ public class UserController {
             model.addAttribute("users", userService.findAll());
             return "user/list";
         }
-        return "redirect:/403";
-    }
-
-    @RequestMapping("/403")
-    public String error403() {
-        return "403";
+        return "redirect:/app/error";
     }
 
     @GetMapping("/user/add")
