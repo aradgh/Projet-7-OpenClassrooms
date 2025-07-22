@@ -2,44 +2,63 @@ package com.nnk.springboot;
 
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@RunWith(SpringRunner.class)
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
+@Transactional
+@ActiveProfiles("test")
 public class RatingTests {
 
 	@Autowired
 	private RatingRepository ratingRepository;
 
 	@Test
-	public void ratingTest() {
-		Rating rating = new Rating("Moodys Rating", "Sand PRating", "Fitch Rating", 10);
+	public void testSaveRating() {
+		Rating rating = new Rating("Moodys A", "SandP A", "Fitch A", 5);
+		Rating saved = ratingRepository.save(rating);
 
-		// Save
-		rating = ratingRepository.save(rating);
-        Assert.assertEquals(10, rating.getOrderNumber());
+        assertEquals(5, saved.getOrderNumber());
+	}
 
-		// Update
-		rating.setOrderNumber(20);
-		rating = ratingRepository.save(rating);
-        Assert.assertEquals(20, rating.getOrderNumber());
+	@Test
+	public void testUpdateRating() {
+		Rating rating = new Rating("Moodys B", "SandP B", "Fitch B", 8);
+		Rating saved = ratingRepository.save(rating);
 
-		// Find
-		List<Rating> listResult = ratingRepository.findAll();
-        Assert.assertFalse(listResult.isEmpty());
+		saved.setOrderNumber(12);
+		Rating updated = ratingRepository.save(saved);
 
-		// Delete
-		Integer id = rating.getId();
-		ratingRepository.delete(rating);
-		Optional<Rating> ratingList = ratingRepository.findById(id);
-		Assert.assertFalse(ratingList.isPresent());
+		assertEquals(12, updated.getOrderNumber());
+	}
+
+	@Test
+	public void testFindAllRatings() {
+		ratingRepository.save(new Rating("Moodys C", "SandP C", "Fitch C", 3));
+		ratingRepository.save(new Rating("Moodys D", "SandP D", "Fitch D", 4));
+
+		List<Rating> ratings = ratingRepository.findAll();
+
+		assertTrue(ratings.size() >= 2);
+	}
+
+	@Test
+	public void testDeleteRating() {
+		Rating rating = new Rating("Moodys E", "SandP E", "Fitch E", 9);
+		Rating saved = ratingRepository.save(rating);
+
+		Integer id = saved.getId();
+		ratingRepository.delete(saved);
+
+		Optional<Rating> deleted = ratingRepository.findById(id);
+		assertFalse(deleted.isPresent());
 	}
 }
