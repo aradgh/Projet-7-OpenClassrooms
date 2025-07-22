@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Login</title>
+</head>
+<body class="m-3">
+    <h1>Login with Username and Password</h1>
+    <form method="post" th:action="@{/login}" class="w-25 mt-5">
+        <div class="mb-3">
+            <label for="username" class="form-label">User:</label>
+            <input id="username" type="text" name="username" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input id="password" type="password" name="password" class="form-control"/>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+</body>
+</html>
