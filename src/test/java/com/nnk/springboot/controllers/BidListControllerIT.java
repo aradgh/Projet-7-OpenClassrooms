@@ -22,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@WithMockUser(username = "user")
 @ActiveProfiles("test")
 class BidListControllerIT {
 
@@ -37,7 +38,6 @@ class BidListControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "user")
     @DisplayName("When calling GET /bidList/list, should display Bid List page containing the new bid 'Account Test'")
     void shouldDisplayBidListPage() throws Exception {
         BidList bid = new BidList("Account Test", "Type Test", new BigDecimal("10.0"));
@@ -49,7 +49,6 @@ class BidListControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "user")
     @DisplayName("When calling GET /bidList/add, should get Bid Add Form containing 'Add New Bid'")
     void shouldShowAddBidForm() throws Exception {
         mockMvc.perform(get("/bidList/add"))
@@ -59,7 +58,6 @@ class BidListControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "user")
     @DisplayName("When calling POST /bidList/validate, should validate and add bid")
     void shouldValidateAndAddBid() throws Exception {
         mockMvc.perform(post("/bidList/validate")
@@ -73,7 +71,7 @@ class BidListControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "user")
+    @DisplayName("When calling POST /bidList/validate with invalid data, should reject and show errors")
     void shouldRejectInvalidBid() throws Exception {
         mockMvc.perform(post("/bidList/validate")
                 .with(csrf())
@@ -87,7 +85,7 @@ class BidListControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "user")
+    @DisplayName("When calling GET /bidList/update/{id}, should show the update form with bid data")
     void shouldShowUpdateForm() throws Exception {
         BidList bid = new BidList("Account", "Type", new BigDecimal("100.0"));
         bid = bidListRepository.save(bid);
@@ -95,11 +93,12 @@ class BidListControllerIT {
         mockMvc.perform(get("/bidList/update/" + bid.getBidListId()))
             .andExpect(status().isOk())
             .andExpect(view().name("bidList/update"))
-            .andExpect(model().attributeExists("bidList"));
+            .andExpect(model().attributeExists("bidList"))
+            .andExpect(content().string(containsString("Account")));
     }
 
     @Test
-    @WithMockUser(username = "user")
+    @DisplayName("When calling POST /bidList/update/{id} with valid data, should update and redirect to list")
     void shouldUpdateValidBid() throws Exception {
         BidList bid = new BidList("Account", "Type", new BigDecimal("100.0"));
         bid = bidListRepository.save(bid);
@@ -115,7 +114,7 @@ class BidListControllerIT {
     }
 
     @Test
-    @WithMockUser(username = "user")
+    @DisplayName("When calling GET /bidList/delete/{id}, should delete bid and redirect to list")
     void shouldDeleteBid() throws Exception {
         BidList bid = new BidList("To Delete", "Type", new BigDecimal("50.0"));
         bid = bidListRepository.save(bid);
