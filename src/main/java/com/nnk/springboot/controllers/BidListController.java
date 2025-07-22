@@ -37,7 +37,7 @@ public class BidListController {
     }
 
     @PostMapping("/validate")
-    public String validate(@Valid BidList bid, BindingResult result, Model model) {
+    public String validate(@Valid BidList bid, BindingResult result) {
         if (result.hasErrors()) {
             return "bidList/add";
         }
@@ -67,7 +67,7 @@ public class BidListController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model) {
+    public String deleteBid(@PathVariable("id") Integer id) {
         bidListService.deleteBidList(id);
         return "redirect:/bidList/list";
     }

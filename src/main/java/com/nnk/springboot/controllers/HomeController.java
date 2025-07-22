@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController
 {
 	@RequestMapping("/")
-	public String home(Model model)
+	public String home()
 	{
 		return "home";
 	}
 
 	@RequestMapping("/admin/home")
-	public String adminHome(Model model)
+	public String adminHome()
 	{
 		return "redirect:/bidList/list";
 	}

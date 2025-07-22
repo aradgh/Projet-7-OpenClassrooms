@@ -32,7 +32,7 @@ public class RuleNameController {
     }
 
     @PostMapping("/ruleName/validate")
-    public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
+    public String validate(@Valid RuleName ruleName, BindingResult result) {
         if (!result.hasErrors()) {
             ruleNameService.save(ruleName);
             return "redirect:/ruleName/list";
@@ -49,7 +49,7 @@ public class RuleNameController {
 
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
-                                 BindingResult result, Model model) {
+                                 BindingResult result) {
         if (result.hasErrors()) {
             ruleName.setId(id);
             return "ruleName/update";
@@ -60,7 +60,7 @@ public class RuleNameController {
     }
 
     @GetMapping("/ruleName/delete/{id}")
-    public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
+    public String deleteRuleName(@PathVariable("id") Integer id) {
         ruleNameService.delete(id);
         return "redirect:/ruleName/list";
     }
