@@ -19,10 +19,10 @@ import java.sql.Timestamp;
 @Setter
 @NoArgsConstructor
 public class CurvePoint {
-    public CurvePoint(int curveId, BigDecimal term, BigDecimal value) {
+    public CurvePoint(int curveId, BigDecimal term, BigDecimal curveValue) {
         this.curveId = curveId;
         this.term = term;
-        this.value = value;
+        this.curveValue = curveValue;
     }
 
     @Id
@@ -40,10 +40,12 @@ public class CurvePoint {
         message = "Le champ 'term' doit être un nombre avec au maximum 5 chiffres avant la virgule et 2 après")
     private BigDecimal term;
 
+    /* Ici, on a renommé le champ value en curveValue car value est un mot réservé en SQL
+     * ce qui crée des erreurs quand j'utilise H2 pour les tests */
     @NotNull(message = "Le champ 'value' est requis")
     @Digits(integer = 5, fraction = 2,
         message = "Le champ 'value' doit être un nombre avec au maximum 5 chiffres avant la virgule et 2 après")
-    private BigDecimal value;
+    private BigDecimal curveValue;
 
 
     /*    Les champs suivants n'ont pas d'annotations de validation
