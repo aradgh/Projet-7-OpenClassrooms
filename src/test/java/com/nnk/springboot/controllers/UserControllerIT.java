@@ -33,9 +33,6 @@ public class UserControllerIT {
     @MockBean
     private UserService userService;
 
-    @MockBean
-    private UserDetails userDetails;
-
     @Test
     @DisplayName("GET /user/list as ADMIN should return user list view")
     public void testUserList_AdminAccess() throws Exception {
